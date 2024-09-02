@@ -1,0 +1,21 @@
+/* Define the keyframes for the animation */
+@keyframes expand {
+  0% {
+    height: 0;
+  }
+
+  100% {
+    height: 100vh;
+  }
+}
+
+
+.header {
+  transition: background-color 0.5s ease;
+}
+
+.expanded {
+  background-color: white;
+  height: 100vh;
+  animation: expand 0.5s ease-out;
+}
