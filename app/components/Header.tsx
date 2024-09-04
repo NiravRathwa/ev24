@@ -1,84 +1,103 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "primeicons/primeicons.css";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, MotionProps } from "framer-motion";
 import "./Header.css";
+import { ReactNode } from "react";
 type Props = {};
 
+const itemVariants = {
+  visible: { opacity: 1, scale: 1 },
+  hidden: { opacity: 0, scale: 0.8 },
+};
+
+type MotionListItemProps = MotionProps & {
+  children: ReactNode;
+};
+
+const MotionListItem = ({ children, ...props }: MotionListItemProps) => (
+  <motion.li
+    variants={itemVariants}
+    whileHover={{ scale: 1.2 }}
+    whileTap={{ scale: 0.8 }}
+    transition={{ type: "spring", stiffness: 300 }}
+    style={{ transformOrigin: "center" }}
+    {...props}
+    className="text-black md:text-white"
+  >
+    {children}
+  </motion.li>
+);
+
+const containerVariants = {
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
 const Header = (props: Props) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  console.log(isMobile);
   const toggle = () => {
     setOpen(!open);
   };
-  const iconColor = open ? 'black' : 'white';
-  const Ul = (open: boolean) => (
-    <motion.ul
-    className={` gap-2 md:gap-4 ${
-      open ? "flex flex-col items-start text-black" : "hidden md:flex items-center justify-center"
-    }`}
-  >
-    <motion.li
-      whileHover={{ scale: 1.2 }}
-      whileTap={{ scale: 0.8 }}
-      transition={{ type: 'spring', stiffness: 300 }}
-      style={{ transformOrigin: 'center' }}
-    >
-      <a href="#">Our Products</a>
-    </motion.li>
-    <motion.li
-      whileHover={{ scale: 1.2 }}
-      whileTap={{ scale: 0.8 }}
-      transition={{ type: 'spring', stiffness: 300 }}
-      style={{ transformOrigin: 'center' }}
-    >
-      <a href="#">Our Services</a>
-    </motion.li>
-    <motion.li
-      whileHover={{ scale: 1.2 }}
-      whileTap={{ scale: 0.8 }}
-      transition={{ type: 'spring', stiffness: 300 }}
-      style={{ transformOrigin: 'center' }}
-    >
-      <a href="/about">About</a>
-    </motion.li>
-    <motion.li
-      whileHover={{ scale: 1.2 }}
-      whileTap={{ scale: 0.8 }}
-      transition={{ type: 'spring', stiffness: 300 }}
-      style={{ transformOrigin: 'center' }}
-    >
-      <a href="#">Blog</a>
-    </motion.li>
-    <motion.li
-      whileHover={{ scale: 1.2 }}
-      whileTap={{ scale: 0.8 }}
-      transition={{ type: 'spring', stiffness: 300 }}
-      style={{ transformOrigin: 'center' }}
-    >
-      <a href="#">Contact Us</a>
-    </motion.li>
-    <motion.li
-      whileHover={{ scale: 1.2 }}
-      whileTap={{ scale: 0.8 }}
-      transition={{ type: 'spring', stiffness: 300 }}
-      style={{ transformOrigin: 'center' }}
-    >
-      <a href="/products">Products</a>
-    </motion.li>
-  </motion.ul>
-  );
+  const iconColor = open ? "black" : "white";
+  const Ul = ({ open }: { open: boolean }) => {
+    return (
+      <motion.ul
+        className={`gap-2 md:gap-4 p-4 ${
+          open
+            ? "flex flex-col md:flex-row md:justify-center items-start md:items-center"
+            : "hidden"
+        }`}
+        variants={containerVariants}
+        initial="hidden"
+        animate={open ? "visible" : "hidden"}
+      >
+        <MotionListItem>
+          <a href="#">Our Products</a>
+        </MotionListItem>
+        <MotionListItem>
+          <a href="#">Our Services</a>
+        </MotionListItem>
+        <MotionListItem>
+          <a href="#">About</a>
+        </MotionListItem>
+        <MotionListItem>
+          <a href="#">Blog</a>
+        </MotionListItem>
+        <MotionListItem>
+          <a href="#">Contact Us</a>
+        </MotionListItem>
+        <MotionListItem>
+          <a href="#">Products</a>
+        </MotionListItem>
+      </motion.ul>
+    );
+  };
   return (
     <motion.header
-      className={`header text-white p-4 z-10 relative ${
-        open ? "expanded" : ""
-      }`}
+      className={`header p-4 z-10 relative ${open ? "expanded" : "collapsed"}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <nav className="md:hidden box-content ">
-        <div className=" relative  flex justify-between items-center z-10  px-4 ">
+      <nav className=" box-content ">
+        <div className="md:hidden relative  flex justify-between items-center z-10  px-4 ">
           <div className="bg-white">
             {" "}
             <Image
@@ -104,10 +123,46 @@ const Header = (props: Props) => {
             )}
           </div>
         </div>
-        {Ul(open)}
+
+        {!isMobile ? (
+          <motion.ul
+            className="flex justify-center items-center gap-4 p-4"
+            initial="hidden"
+            animate="visible"
+          >
+            <MotionListItem>
+              <a href="#">Our Products</a>
+            </MotionListItem>
+            <MotionListItem>
+              <a href="#">Our Services</a>
+            </MotionListItem>
+            <MotionListItem>
+              <a href="#">About</a>
+            </MotionListItem>
+            <li className="bg-white">
+            <Image
+              src="/next.svg"
+              alt="Example Image"
+              width={100}
+              height={70}
+            ></Image>
+          </li>
+            <MotionListItem>
+              <a href="#">Blog</a>
+            </MotionListItem>
+            <MotionListItem>
+              <a href="#">Contact Us</a>
+            </MotionListItem>
+            <MotionListItem>
+              <a href="#">Products</a>
+            </MotionListItem>
+          </motion.ul>
+        ) : (
+          <Ul open={open} />
+        )}
       </nav>
 
-      <nav className="hidden md:block">{Ul(open)}</nav>
+      <nav className="hidden md:block"></nav>
     </motion.header>
   );
 };
