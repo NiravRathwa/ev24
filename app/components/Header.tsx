@@ -51,7 +51,6 @@ const Header = (props: Props) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  console.log(isMobile);
   const toggle = () => {
     setOpen(!open);
   };
