@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Josefin_Slab } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Josefin_Slab({
+  subsets: ["latin"],
+  display: "swap",
+  fallback: ["sans-serif", "Arial"],
+  preload: true,
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
