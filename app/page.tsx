@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import CardComponent from "./components/CardComponent";
+import SwiperComponent from "./components/SwiperComponent";
 
 const containerVariants = {
   visible: {
@@ -45,7 +46,7 @@ export default function Home() {
 
   return (
     <>
-      <section ref={ref1} className="relative w-full h-screen overflow-hidden">
+    <section ref={ref1} className="w-full h-screen overflow-hidden">
         <Header />
         <div className="absolute inset-0 bg-custom-gradient z-0"></div>
         <motion.div
@@ -168,7 +169,7 @@ export default function Home() {
       </section>
 
       <section className="w-full min-h-screen flex flex-col items-center justify-center gap-5 bg-slate-200 ">
-        <div className="flex  flex-col md:flex-row justify-center items-center gap-5 p-4">
+        <div className="flex  flex-col md:flex-row justify-center items-center gap-5 p-4 flex-wrap">  
           {cardData.map((data) => (
             <CardComponent data={data} />
           ))}
@@ -176,6 +177,10 @@ export default function Home() {
         <button className="bg-red-600 mb-5 md:mb-0 p-2 rounded-md">
           Meet Our Team
         </button>
+      </section> 
+
+      <section className="w-full  h-[50vh] bg-blue-500 flex justify-center items-center">
+        <SwiperComponent/>
       </section>
     </>
   );

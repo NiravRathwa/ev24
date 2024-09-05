@@ -96,9 +96,8 @@ const Header = (props: Props) => {
       transition={{ duration: 0.5 }}
     >
       <nav className=" box-content ">
-        <div className="md:hidden relative  flex justify-between items-center z-10  px-4 ">
+        <div className="md:hidden relative flex justify-between items-center z-10  px-4 ">
           <div className="bg-white">
-            {" "}
             <Image
               src="/next.svg"
               alt="Example Image"
@@ -106,7 +105,7 @@ const Header = (props: Props) => {
               height={70}
             />
           </div>
-          <div>
+          <div className="mt-10">
             {open ? (
               <i
                 className="pi pi-times text-white"
