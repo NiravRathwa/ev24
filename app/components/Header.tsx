@@ -20,7 +20,7 @@ const MotionListItem = ({ children, ...props }: MotionListItemProps) => (
   <motion.li
     variants={itemVariants}
     whileHover={{ scale: 1.2 }}
-    whileTap={{ scale: 0.8 }}
+    // whileTap={{ scale: 0.8 }}
     transition={{ type: "spring", stiffness: 300 }}
     style={{ transformOrigin: "center" }}
     {...props}
@@ -68,22 +68,22 @@ const Header = (props: Props) => {
         animate={open ? "visible" : "hidden"}
       >
         <MotionListItem>
-          <a href="#">Our Products</a>
+          <a href="#" className="font-bold text-lg">Our Products</a>
         </MotionListItem>
         <MotionListItem>
-          <a href="#">Our Services</a>
+          <a href="#" className="font-bold text-lg">Our Services</a>
         </MotionListItem>
         <MotionListItem>
-          <a href="#">About</a>
+          <a href="#" className="font-bold text-lg">About</a>
         </MotionListItem>
         <MotionListItem>
-          <a href="#">Blog</a>
+          <a href="#" className="font-bold text-lg">Blog</a>
         </MotionListItem>
         <MotionListItem>
-          <a href="#">Contact Us</a>
+          <a href="#" className="font-bold text-lg">Contact Us</a>
         </MotionListItem>
         <MotionListItem>
-          <a href="#">Products</a>
+          <a href="#" className="font-bold text-lg">Products</a>
         </MotionListItem>
       </motion.ul>
     );
@@ -105,7 +105,7 @@ const Header = (props: Props) => {
               height={70}
             />
           </div>
-          <div className="mt-10">
+          <div className="mt-4">
             {open ? (
               <i
                 className="pi pi-times text-white"
