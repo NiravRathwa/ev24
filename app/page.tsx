@@ -6,6 +6,7 @@ import { useRef } from "react";
 import CardComponent from "./components/CardComponent";
 import SwiperComponent from "./components/SwiperComponent";
 import Footer from "./components/Footer";
+import { WithLayout } from "./components/withLayout";
 
 const containerVariants = {
   visible: {
@@ -75,7 +76,7 @@ const feedbackData = [
   },
 ];
 
-export default function Home() {
+const Home = () => {
   const ref1 = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
@@ -85,8 +86,8 @@ export default function Home() {
 
   return (
     <>
-        <Header />
       <section ref={ref1} className="w-full h-screen overflow-hidden">
+        {/* <Header /> */}
         <div className="absolute inset-0 bg-custom-gradient z-0"></div>
         <motion.div
           className="relative z-10 flex flex-col items-start justify-normal gap-5 w-full h-full mt-20 text-white md:mt-8 p-8"
@@ -224,7 +225,8 @@ export default function Home() {
       <section className="w-full  min-h-screen bg-red-400 flex justify-center items-center">
         <SwiperComponent type="feedback" content={feedbackData} />
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
-}
+};
+export default WithLayout(Home);

@@ -51,6 +51,19 @@ const Header = (props: Props) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  // useEffect(() => {
+  //   if (open) {
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "auto";
+  //   }
+
+  //   return () => {
+  //     document.body.style.overflow = "auto";
+  //   };
+  // }, [open]);
+
   const toggle = () => {
     setOpen(!open);
   };
@@ -74,7 +87,7 @@ const Header = (props: Props) => {
           <a href="#" className="font-bold text-lg">Our Services</a>
         </MotionListItem>
         <MotionListItem>
-          <a href="#" className="font-bold text-lg">About</a>
+          <a href="/about" className="font-bold text-lg">About</a>
         </MotionListItem>
         <MotionListItem>
           <a href="#" className="font-bold text-lg">Blog</a>
@@ -95,8 +108,8 @@ const Header = (props: Props) => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <nav className=" box-content ">
-        <div className="md:hidden relative flex justify-between items-center z-10  px-4 ">
+      <nav className="">
+        <div className="md:hidden   fixed top-0 left-0 w-full flex justify-between items-center z-40  px-4 ">
           <div className="bg-white">
             <Image
               src="/next.svg"
@@ -108,7 +121,7 @@ const Header = (props: Props) => {
           <div className="mt-4">
             {open ? (
               <i
-                className="pi pi-times text-white"
+                className="pi pi-times text-white "
                 style={{ color: iconColor, fontSize: "1.5rem" }}
                 onClick={toggle}
               ></i>
@@ -124,7 +137,7 @@ const Header = (props: Props) => {
 
         {!isMobile ? (
           <motion.ul
-            className="flex justify-center items-center gap-4 p-4"
+            className="flex justify-center items-center gap-4 p-4 z-40"
             initial="hidden"
             animate="visible"
           >
@@ -135,7 +148,7 @@ const Header = (props: Props) => {
               <a href="#">Our Services</a>
             </MotionListItem>
             <MotionListItem>
-              <a href="#">About</a>
+              <a href="/about">About</a>
             </MotionListItem>
             <li className="bg-white">
             <Image
@@ -160,7 +173,6 @@ const Header = (props: Props) => {
         )}
       </nav>
 
-      <nav className="hidden md:block"></nav>
     </motion.header>
   );
 };

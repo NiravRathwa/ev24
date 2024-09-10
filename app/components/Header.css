@@ -27,6 +27,7 @@
 }
 
 .collapsed {
-  height: 0;
+  /* height: 5rem !important; */
+  /* background-color: black; */
   animation: collapse 0.5s ease-out forwards;
 }
